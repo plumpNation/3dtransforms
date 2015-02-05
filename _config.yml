@@ -1,6 +1,8 @@
 # auto: true
-pygments: true
+highlighter: pygments
 permalink: /:categories/:title.html
 
 # site-wide data
 site_name: Intro to CSS 3D transforms
+
+host: 0.0.0.0
