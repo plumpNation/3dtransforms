@@ -1,38 +1,9 @@
-var card = document.getElementById('card');
+var init = function() {
+  var card = document.getElementById('card');
+  
+  document.getElementById('flip').addEventListener( 'click', function(){
+    card.toggleClassName('flipped');
+  }, false);
+};
 
-function setRotation(angle) {
-  var num = 90; 
-  if (angle > num) angle = num;
-  if (angle < -num) angle = -num;
-  card.style.transform = "rotateY( " + angle + "deg )";
-}
-
-function setOrientation(x) {
-  var origin = 'right';
-
-  if (x > 0) {
-    origin = 'left';
-  }
-
-  card.style.transformOrigin = "top " + origin;
-}
-
-function setOpacity(x) {
-  card.style.opacity = Math.max(1 - Math.abs(x) / 200, 0.1);
-}
-
-var limit = 180;
-Draggable.create(card, {
-  bounds:{
-    maxX:limit,
-    minX:-limit
-  },
-  type: 'left',
-  onDrag: function () {
-    var angle = -(this.x / 2);
-    setRotation(angle);
-    setOrientation(this.x);
-    setOpacity(this.x);
-  },
-  throwProps: true
-});
+window.addEventListener('DOMContentLoaded', init, false);
