@@ -1,8 +1,9 @@
 var card = document.getElementById('card');
 
-function setRotation(angle) { 
-  if (angle > 90) angle = 90;
-  if (angle < -90) angle = -90;
+function setRotation(angle) {
+  var num = 90; 
+  if (angle > num) angle = num;
+  if (angle < -num) angle = -num;
   card.style.transform = "rotateY( " + angle + "deg )";
 }
 
@@ -17,12 +18,21 @@ function setOrientation(x) {
 }
 
 function setOpacity(x) {
-  card.style.opacity = Math.max(1 - Math.abs(x) / 200, 0.3);
+  card.style.opacity = Math.max(1 - Math.abs(x) / 200, 0.1);
 }
 
-Draggable.create(card, {type: 'left', onDrag: function () {
-  var angle = -(this.x / 2);
-  setRotation(angle);
-  setOrientation(this.x);
-  setOpacity(this.x);
-}, throwProps: true});
+var limit = 180;
+Draggable.create(card, {
+  bounds:{
+    maxX:limit,
+    minX:-limit
+  },
+  type: 'left',
+  onDrag: function () {
+    var angle = -(this.x / 2);
+    setRotation(angle);
+    setOrientation(this.x);
+    setOpacity(this.x);
+  },
+  throwProps: true
+});
